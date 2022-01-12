@@ -2,6 +2,7 @@ import {Parser} from "../cmd/parser";
 import * as sinon from 'sinon'
 import * as ethers from 'ethers'
 import DragonCreator from './fixture/contracts/DragonCreator.sol/DragonCreator.json'
+import DragonCrossbreed from './fixture/contracts/DragonCrossbreed.sol/DragonCrossbreed.json'
 import logHash from './fixture/logHash.json'
 import blockHash from './fixture/blockHash.json'
 
@@ -69,24 +70,16 @@ describe('parser', () => {
     await parser.parse(() => {})
     sandbox.assert.notCalled(spy)
   })
-})
 
-it('debug', async () => {
-  const parser = new Parser({
-    bunch: 5,
-    address: '0x8E095D160C1056Dca391C076107C5df4E184aE0C',
-    fromBlock: 13979600,
-    toBlock: 13979615,
-    eventName: 'DragonCreated',
-    providerName: 'InfuraProvider',
-    providerApiKey: 'dde658cd27a740a3983c2ecce4884407',
-    abi: DragonCreator.abi
+  it('Should split a large logs into parts and parse them consistently', async () => {
+    const testLog = [...Array(150).keys()]
+    provider.getLogs.returns(testLog)
+    sandbox.stub(parser, '_decode').callsFake((l) => l)
+    const promiseSpy = sandbox.spy(Promise, 'all')
+    await parser._parse(1,1)
+
+    sandbox.assert.calledWith(promiseSpy, testLog.slice(0, 100))
+    sandbox.assert.calledWith(promiseSpy, testLog.slice(100, 150))
   })
-
-  const callback = ({from, to, data}) => {
-    console.log(from, to, data)
-  }
-  const res = await parser.parse(callback)
-
-  console.log(res)
 })
+

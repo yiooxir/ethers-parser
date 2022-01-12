@@ -15,6 +15,10 @@ export class Parser<DataType> {
   readonly _loadValue: boolean
   private readonly __blockMemo = new Map<number, Timestamp>()
 
+  protected _print(message) {
+    this._printLog && console.debug(message)
+  }
+  
   protected async _getBlockTimestamp(blockNum: number) {
     if (this.__blockMemo.has(blockNum))
       return this.__blockMemo.get(blockNum)
@@ -53,7 +57,22 @@ export class Parser<DataType> {
       toBlock: skip + limit
     }
     const logs = await this._provider.getLogs(filter)
-    return Promise.all(logs.map(l => this._decode(l)))
+
+    const _chunk = 100
+    const _slicedLog = []
+
+    for(let i = 0; i < logs.length; i += _chunk) _slicedLog.push(logs.slice(i, i + _chunk))
+    if (_slicedLog.length > 1)
+      this._print(`Log array is to big (${logs.length}) and will be parsed with ${_slicedLog.length} chunks.`)
+
+    let result = []
+    for(let [i, lg] of _slicedLog.entries()) {
+      result = result.concat(await Promise.all(lg.map(l => this._decode(l))))
+      if (_slicedLog.length > 1)
+        this._print(`Log chunk ${i + 1} processed.`)
+    }
+
+    return result
   }
 
   constructor({
@@ -87,7 +106,7 @@ export class Parser<DataType> {
     for (let i = _fromBlock; i <= _toBlock; i += limit) {
       const _limit = _toBlock >= i + limit ? limit - 1 : _toBlock - i
       const data = (await this._parse(i, _limit)).filter(e => !!e)
-      this._printLog && console.info(`Blocks ${i}-${i + _limit} processed. Resolved ${data.length} events.`)
+      this._print(`Blocks ${i}-${i + _limit} processed. Resolved ${data.length} Events.`)
       onProgressFn({from: i, to: i + _limit, data})
     }
   }
