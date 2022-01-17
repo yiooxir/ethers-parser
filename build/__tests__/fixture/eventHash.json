@@ -1,0 +1,132 @@
+{
+    "eventFragment": {
+        "name": "DragonCreated",
+        "anonymous": false,
+        "inputs": [
+            {
+                "name": "dragonId",
+                "type": "uint256",
+                "indexed": false,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null,
+                "baseType": "uint256",
+                "_isParamType": true
+            },
+            {
+                "name": "eggId",
+                "type": "uint256",
+                "indexed": false,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null,
+                "baseType": "uint256",
+                "_isParamType": true
+            },
+            {
+                "name": "parent1Id",
+                "type": "uint256",
+                "indexed": false,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null,
+                "baseType": "uint256",
+                "_isParamType": true
+            },
+            {
+                "name": "parent2Id",
+                "type": "uint256",
+                "indexed": false,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null,
+                "baseType": "uint256",
+                "_isParamType": true
+            },
+            {
+                "name": "generation",
+                "type": "uint256",
+                "indexed": false,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null,
+                "baseType": "uint256",
+                "_isParamType": true
+            },
+            {
+                "name": "t",
+                "type": "uint8",
+                "indexed": false,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null,
+                "baseType": "uint8",
+                "_isParamType": true
+            },
+            {
+                "name": "genes",
+                "type": "uint256",
+                "indexed": false,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null,
+                "baseType": "uint256",
+                "_isParamType": true
+            },
+            {
+                "name": "creator",
+                "type": "address",
+                "indexed": true,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null,
+                "baseType": "address",
+                "_isParamType": true
+            },
+            {
+                "name": "to",
+                "type": "address",
+                "indexed": true,
+                "components": null,
+                "arrayLength": null,
+                "arrayChildren": null,
+                "baseType": "address",
+                "_isParamType": true
+            }
+        ],
+        "type": "event",
+        "_isFragment": true
+    },
+    "name": "DragonCreated",
+    "signature": "DragonCreated(uint256,uint256,uint256,uint256,uint256,uint8,uint256,address,address)",
+    "topic": "0x30c3ef581371c1f32a51a227038345b13000b518164478749ef983a91f8466b2",
+    "args": {
+        "dragonId": {
+            "type": "BigNumber",
+            "hex": "0x18db"
+        },
+        "eggId": {
+            "type": "BigNumber",
+            "hex": "0x05ab"
+        },
+        "parent1Id": {
+            "type": "BigNumber",
+            "hex": "0x00"
+        },
+        "parent2Id": {
+            "type": "BigNumber",
+            "hex": "0x00"
+        },
+        "generation": {
+            "type": "BigNumber",
+            "hex": "0x01"
+        },
+        "genes": {
+            "type": "BigNumber",
+            "hex": "0x0c5080425b8d25c5"
+        },
+        "t": 1,
+        "creator": "0xaaE9DF0F50D53f9AC50651bF69590aB7b1091451",
+        "to": "0xfe3fdbE9e3EA3F11Fe976010028eDfA33A383644"
+    }
+}
