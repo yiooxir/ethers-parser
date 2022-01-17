@@ -16,7 +16,25 @@ export type Log = {
 }
 
 export type Event = {
-
+  "eventFragment": {
+    "name": string,
+    "anonymous": boolean,
+    "inputs": Array<{
+      name: string,
+      type: string,
+      indexed: boolean,
+      components: any,
+      arrayLength: null,
+      arrayChildren: null,
+      baseType: string,
+      _isParamType: boolean}>,
+    "type": string // "event",
+    "_isFragment": boolean
+  },
+  "name": string // "DragonCreated",
+  "signature": string //"DragonCreated(uint256,uint256,uint256,uint256,uint256,uint8,uint256,address,address)",
+  "topic": string // "0x30c3ef581371c1f32a51a227038345b13000b518164478749ef983a91f8466b2",
+  "args": { [key: string]: any }
 }
 
 export type Transaction = {

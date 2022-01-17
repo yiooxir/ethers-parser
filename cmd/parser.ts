@@ -1,4 +1,4 @@
-import {extractEventData} from "./utils";
+import {extractEventData, safePromise} from "./utils";
 import * as ethers from 'ethers'
 import {EventData, Timestamp} from "./interfaces";
 
@@ -24,7 +24,7 @@ export class Parser<DataType> {
       return this.__blockMemo.get(blockNum)
 
     return (async (blockNum) => {
-      const _bl = await this._provider.getBlock(blockNum)
+      const _bl = await safePromise(() => this._provider.getBlock(blockNum))
       this.__blockMemo.set(blockNum, _bl.timestamp)
       return _bl.timestamp
     })(blockNum)
@@ -36,7 +36,7 @@ export class Parser<DataType> {
     if (name !== this._eventName) return null
 
     const {blockNumber, transactionHash} = log
-    const transaction = this._loadValue ? await this._provider.getTransaction(transactionHash) : null
+    const transaction = this._loadValue ? await safePromise(() => this._provider.getTransaction(transactionHash)) : null
 
     return {
       eventData: extractEventData(_event),
@@ -56,7 +56,7 @@ export class Parser<DataType> {
       fromBlock: skip,
       toBlock: skip + limit
     }
-    const logs = await this._provider.getLogs(filter)
+    const logs = await safePromise(() => this._provider.getLogs(filter))
 
     const _chunk = 100
     const _slicedLog = []
