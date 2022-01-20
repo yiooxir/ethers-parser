@@ -1,4 +1,4 @@
-import { Parser } from "./build/cmd/parser";
+import { Parser } from "./cmd/parser";
 
 export default Parser
 
