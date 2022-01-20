@@ -1,4 +1,4 @@
-import {Parser} from "../cmd/parser";
+import Parser from "../index";
 import * as sinon from 'sinon'
 import * as ethers from 'ethers'
 import DragonCreator from './fixture/contracts/DragonCreator.sol/DragonCreator.json'

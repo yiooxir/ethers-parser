@@ -2,6 +2,7 @@ import {expect} from 'chai'
 import {extractEventData} from "../cmd/utils";
 import event from './fixture/eventHash.json'
 
+
 it('util.extractEventData()', async () => {
   const tmpl = {
     dragonId: {
@@ -44,3 +45,7 @@ it('util.extractEventData()', async () => {
   }
   expect(extractEventData(event)).to.eql(tmpl)
 })
+
+it('util.safePromise', () => {
+})
+
