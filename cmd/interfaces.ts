@@ -3,6 +3,11 @@ export type Address = string
 export type Hash = string
 export type Eth = number
 
+export type BigNumber = {
+  "type": "BigNumber",
+  "hex": string
+}
+
 export type Log = {
   "blockNumber": number,
   "blockHash": string,
@@ -46,27 +51,12 @@ export type Transaction = {
   "transactionIndex": number,
   "confirmations": number,
   "from": string,
-  "gasPrice": {
-    "type": "BigNumber",
-    "hex": string
-  },
-  "maxPriorityFeePerGas": {
-    "type": "BigNumber",
-    "hex": string
-  },
-  "maxFeePerGas": {
-    "type": "BigNumber",
-    "hex": string
-  },
-  "gasLimit": {
-    "type": "BigNumber",
-    "hex": string
-  },
-  "to": "0xaaE9DF0F50D53f9AC50651bF69590aB7b1091451",
-  "value": {
-    "type": "BigNumber",
-    "hex": string
-  },
+  "gasPrice": BigNumber,
+  "maxPriorityFeePerGas": BigNumber,
+  "maxFeePerGas": BigNumber,
+  "gasLimit": BigNumber,
+  "to": string //"0xaaE9DF0F50D53f9AC50651bF69590aB7b1091451",
+  "value": BigNumber,
   "nonce": number,
   "data": string,
   "r": string,
