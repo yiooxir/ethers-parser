@@ -2,7 +2,6 @@ import Parser from "../index";
 import * as sinon from 'sinon'
 import * as ethers from 'ethers'
 import DragonCreator from './fixture/contracts/DragonCreator.sol/DragonCreator.json'
-import DragonCrossbreed from './fixture/contracts/DragonCrossbreed.sol/DragonCrossbreed.json'
 import logHash from './fixture/logHash.json'
 import blockHash from './fixture/blockHash.json'
 
@@ -22,7 +21,7 @@ describe('parser', () => {
   let stub
 
   beforeEach(() => {
-    provider = new ethers.providers.InfuraProvider('mainnet', 'dde658cd27a740a3983c2ecce4884407')
+    provider = new ethers.providers.InfuraProvider('mainnet', '123')
     stub = sandbox.stub(provider)
     stub.getLogs.returns([logHash])
     stub.getBlock.returns(blockHash)
@@ -80,6 +79,13 @@ describe('parser', () => {
 
     sandbox.assert.calledWith(promiseSpy, testLog.slice(0, 100))
     sandbox.assert.calledWith(promiseSpy, testLog.slice(100, 150))
+  })
+
+  it('Parser should await promised callback and complete work after all callback are resolved', async () => {
+    stub.getLogs.returns([])
+    const spy = sandbox.spy(async () => Promise.resolve())
+    await parser.parse(spy)
+    sandbox.assert.calledThrice(spy)
   })
 })
 
