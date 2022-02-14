@@ -17,14 +17,3 @@ export async function safePromise(promiseFn, attempt = 3, __i = 0) {
     }
   }
 }
-
-let i = 0
-
-async function foo() {
-  return i++ < 4 ? Promise.reject(Error(`boo ${i}`)) : Promise.resolve(`good ${i}`)
-}
-
-it('', async () => {
-  const re  = await safePromise(() => foo())
-  console.log(re)
-})

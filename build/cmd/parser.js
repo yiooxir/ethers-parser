@@ -108,7 +108,7 @@ class Parser {
                 const _limit = _toBlock >= i + limit ? limit - 1 : _toBlock - i;
                 const data = (yield this._parse(i, _limit)).filter(e => !!e);
                 this._print(`Blocks ${i}-${i + _limit} processed. Resolved ${data.length} Events.`);
-                onProgressFn({ from: i, to: i + _limit, data });
+                yield onProgressFn({ from: i, to: i + _limit, data });
             }
         });
     }

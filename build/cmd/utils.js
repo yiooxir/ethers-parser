@@ -34,13 +34,3 @@ function safePromise(promiseFn, attempt = 3, __i = 0) {
     });
 }
 exports.safePromise = safePromise;
-let i = 0;
-function foo() {
-    return __awaiter(this, void 0, void 0, function* () {
-        return i++ < 4 ? Promise.reject(Error(`boo ${i}`)) : Promise.resolve(`good ${i}`);
-    });
-}
-it('', () => __awaiter(void 0, void 0, void 0, function* () {
-    const re = yield safePromise(() => foo());
-    console.log(re);
-}));

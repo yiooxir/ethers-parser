@@ -2,6 +2,10 @@ export declare type Timestamp = number;
 export declare type Address = string;
 export declare type Hash = string;
 export declare type Eth = number;
+export declare type BigNumber = {
+    "type": "BigNumber";
+    "hex": string;
+};
 export declare type Log = {
     "blockNumber": number;
     "blockHash": string;
@@ -46,27 +50,12 @@ export declare type Transaction = {
     "transactionIndex": number;
     "confirmations": number;
     "from": string;
-    "gasPrice": {
-        "type": "BigNumber";
-        "hex": string;
-    };
-    "maxPriorityFeePerGas": {
-        "type": "BigNumber";
-        "hex": string;
-    };
-    "maxFeePerGas": {
-        "type": "BigNumber";
-        "hex": string;
-    };
-    "gasLimit": {
-        "type": "BigNumber";
-        "hex": string;
-    };
-    "to": "0xaaE9DF0F50D53f9AC50651bF69590aB7b1091451";
-    "value": {
-        "type": "BigNumber";
-        "hex": string;
-    };
+    "gasPrice": BigNumber;
+    "maxPriorityFeePerGas": BigNumber;
+    "maxFeePerGas": BigNumber;
+    "gasLimit": BigNumber;
+    "to": string;
+    "value": BigNumber;
     "nonce": number;
     "data": string;
     "r": string;
